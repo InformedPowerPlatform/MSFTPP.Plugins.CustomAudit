@@ -4,7 +4,8 @@
 
 ## Overview
 
-A solution that will allow you to create rows in a Custom Audit table for enhanced analysis. This solution consists of a custom .NET plugin and a model driven app to configure and monitor the auditing.
+A Power Platform solution that will allow you to create rows in a Custom Audit table in Dataverse for enhanced analysis. 
+This solution consists of a custom activity table, custom .NET plugin and a model driven app to configure and monitor the auditing. This is NOT a replacement for the OOTB auditing feature, but an enhancement to use in addition to that service.
 
 _Disclaimer: This solution is authored by employees of Microsoft but is in no way endorsed by Microsoft Corporation. Code included is custom and can be modified by the receiving user and therefore is NOT supported by Microsoft or any of its affiliates or partners. No warranties or support are expressed or implied._
 
@@ -12,9 +13,13 @@ To Download the latest Solution, click the [Releases](https://github.com/Informe
 
 ## Prerequisites
 
+### Requirements
+
+- Microsoft Power Platform Environment with Dataverse data store enabled
+
 In order to audit a table, the table MUST be enabled for **Creating a new activity**. This can be enabled by editing the properties of the table in the Power Apps maker tool.
 
-**Note: Ensure you are in the correct environment at the top right of the screen.**
+>Note: Ensure you are in the correct environment at the top right of the screen.
 
 - Select **Tables** in the left navigation.
 - Locate the table you wish to audit and click on the name.
@@ -50,12 +55,12 @@ After importing the solution, a number of items are now available in your enviro
 
 Once you have confirmed that the table you wish to audit is enabled for activities, you can now configure which columns will be audited.
 
-1. Launch the Power Apps maker tool and select the environment.
-2. From the Left Navigation, select Apps
-3. Locate the Model driven app called **Custom Audit Builder** andClick to Play this app.
-4. From the Left Navigation, select **Builder**.
+- Launch the Power Apps maker tool and select the environment.
+- From the Left Navigation, select Apps
+- Locate the Model driven app called **Custom Audit Builder** and Click to Play this app.
+- From the Left Navigation, select **Builder**.
 
-## Adding a new Table/Message for audit
+### Adding a new Table/Message for audit
 
 - To Add a New Table and Message (create/update) for auditing, click **+ Add New** button.
     - You will be presented with a list of tables. If the table you want to audit is not shown, recheck that the table has been enabled for activities. Only tables that are enabled for activities will show in the list.
@@ -68,7 +73,7 @@ Once you have confirmed that the table you wish to audit is enabled for activiti
     - As a best practice it is recommended that you DO NOT select ALL columns to be audited. Be selective about what really needs to be logged.
 - After selecting the columns, click the **Submit** button at the top right side of the page. This will create the appropriate Steps and Images required in the plugin registration to audit the table.
 
-## Edit and Existing Plugin Step
+### Edit and Existing Plugin Step
 
 - If you have previously configured a plugin step to audit a table and wish to modify that step (e.g. add/remove columns), you can select the **Edit Existing** button **.**
 - You will be presented with a list of the previously configured steps for the Audit plugin. Select the step you wish to modify.
