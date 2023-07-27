@@ -8,6 +8,8 @@ A solution that will allow you to create rows in a Custom Audit table for enhanc
 
 _Disclaimer: This solution is authored by employees of Microsoft but is in no way endorsed by Microsoft Corporation. Code included is custom and can be modified by the receiving user and therefore is NOT supported by Microsoft or any of its affiliates or partners. No warranties or support are expressed or implied._
 
+To Download the latest Solution, click the Releases page link.
+
 ## Prerequisites
 
 In order to audit a table, the table MUST be enabled for **Creating a new activity**. This can be enabled by editing the properties of the table in the Power Apps maker tool.
@@ -100,3 +102,4 @@ Once you have confirmed that the table you wish to audit is enabled for activiti
     - **Entity Alias** : Type the word **Target** (case sensitive)
     - **Parameters** : Click the Ellipsis to access a list of columns. This is where you select which columns will be passed in for auditing. It is recommended that you click the ellipsis button, deselect all, and then select ONLY the columns that you wish to audit from the list. If you want a column audited, it MUST be in this list. Ideally, this list should match the Filtering attributes you selected in a previous step.
     - Click **Register Step** to save the changes.
+
