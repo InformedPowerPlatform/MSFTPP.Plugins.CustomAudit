@@ -277,10 +277,17 @@ MSFTPP.CAB.getSDKMessageFiltersForEntity = function (entityName) {
                     var messagename = results.value[i]["sdkmessageid"]["name"];
 
                     // MSFTPP.CAB.showConsoleLog("messagename :: " + messagename);
+
+                    // Removing the Delete option for now, need to research more how to handle delete messages
+                    /*
                     if (messagename === 'Create'
                         || messagename === 'Delete'
                         || messagename === 'Update'
                     ) {
+                    */
+                    if (messagename === 'Create'
+                       || messagename === 'Update'
+                        ) {
                         let option = document.createElement("option");
                         option.value = sdkmessagefilterid + "~" + sdkmessageid;
                         option.innerText = messagename;
