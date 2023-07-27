@@ -8,7 +8,7 @@ A solution that will allow you to create rows in a Custom Audit table for enhanc
 
 _Disclaimer: This solution is authored by employees of Microsoft but is in no way endorsed by Microsoft Corporation. Code included is custom and can be modified by the receiving user and therefore is NOT supported by Microsoft or any of its affiliates or partners. No warranties or support are expressed or implied._
 
-To Download the latest Solution, click the Releases page link.
+To Download the latest Solution, click the [Releases](https://github.com/InformedPowerPlatform/MSFTPP.Plugins.CustomAudit/releases) page.
 
 ## Prerequisites
 
