@@ -56,8 +56,8 @@ After importing the solution, a number of items are now available in your enviro
 Once you have confirmed that the table you wish to audit is enabled for activities, you can now configure which columns will be audited.
 
 - Launch the Power Apps maker tool and select the environment.
-- From the Left Navigation, select Apps
-- Locate the Model driven app called **Custom Audit Builder** and Click to Play this app.
+- From the Left Navigation, select **Apps**
+- Locate the Model driven app called **Custom Audit Builder** and Click to **Play** this app.
 - From the Left Navigation, select **Builder**.
 
 ### Adding a new Table/Message for audit
@@ -73,9 +73,9 @@ Once you have confirmed that the table you wish to audit is enabled for activiti
     - As a best practice it is recommended that you DO NOT select ALL columns to be audited. Be selective about what really needs to be logged.
 - After selecting the columns, click the **Submit** button at the top right side of the page. This will create the appropriate Steps and Images required in the plugin registration to audit the table.
 
-### Edit and Existing Plugin Step
+### Edit an Existing Plugin Step
 
-- If you have previously configured a plugin step to audit a table and wish to modify that step (e.g. add/remove columns), you can select the **Edit Existing** button **.**
+- If you have previously configured a plugin step to audit a table and wish to modify that step (e.g. add/remove columns), you can select the **Edit Existing** button.
 - You will be presented with a list of the previously configured steps for the Audit plugin. Select the step you wish to modify.
 - A list of columns is built showing ones that have already been selected for audit. Add or Remove columns by checking or unchecking the box next to the column name.
 - After selecting the columns, click the **Submit** button at the top right side of the page. This will update the Plugin and make the changes.
