@@ -7,7 +7,7 @@
 A Power Platform solution that will allow you to create rows in a Custom Audit table in Dataverse for enhanced analysis. 
 This solution consists of a custom activity table, custom .NET plugin and a model driven app to configure and monitor the auditing. This is NOT a replacement for the OOTB auditing feature, but an enhancement to use in addition to that service.
 
-_Disclaimer: This solution is authored by employees of Microsoft but is in no way endorsed by Microsoft Corporation. Code included is custom and can be modified by the receiving user and therefore is NOT supported by Microsoft or any of its affiliates or partners. No warranties or support are expressed or implied._
+_Disclaimer: This solution is authored by employees of Microsoft but is in no way endorsed by Microsoft Corporation. Code included is custom and can be modified by the receiving user and therefore is NOT supported by the publisher, Microsoft, or any of its affiliates or partners. No warranties or support are expressed or implied._
 
 To Download the latest Solution, click the [Releases](https://github.com/InformedPowerPlatform/MSFTPP.Plugins.CustomAudit/releases) page.
 
@@ -108,3 +108,9 @@ Once you have confirmed that the table you wish to audit is enabled for activiti
     - **Parameters** : Click the Ellipsis to access a list of columns. This is where you select which columns will be passed in for auditing. It is recommended that you click the ellipsis button, deselect all, and then select ONLY the columns that you wish to audit from the list. If you want a column audited, it MUST be in this list. Ideally, this list should match the Filtering attributes you selected in a previous step.
     - Click **Register Step** to save the changes.
 
+## Remove a Step to cancel auditing
+
+- Create a solution with the existing plugin steps. They will be prefixed with MSFTPP
+- Once added to the solution, DELETE the step(s) from the environment
+    - Note: You can also perform this with the plugin registration tool.
+- Load the **Plugin Registration** plugin
