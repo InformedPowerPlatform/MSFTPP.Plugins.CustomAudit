@@ -113,4 +113,4 @@ Once you have confirmed that the table you wish to audit is enabled for activiti
 - Create a solution with the existing plugin steps. They will be prefixed with MSFTPP
 - Once added to the solution, DELETE the step(s) from the environment
     - Note: You can also perform this with the plugin registration tool.
-- Load the **Plugin Registration** plugin
+
