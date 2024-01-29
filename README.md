@@ -40,7 +40,7 @@ After importing the solution, a number of items are now available in your enviro
     - **Action** : This is the action message sent by the plugin. Should be either **Create** or **Update**
     - **Regarding** : This is the standard _Regarding_ column for an activity row. It links back to the original record that was being audited.
     - **Old Value** : A text column that stores the old value of the audited row BEFORE the change.
-    - **New Value** : A text column that stores the new value of the audited row BEFORE the change.
+    - **New Value** : A text column that stores the new value of the audited row AFTER the change.
 >Note: Old Value and New Value are limited to 4,000 characters. If you need to store more data, you will have to customize the table with a larger multi-line text column. You will also need to customize the .NET plugin to add the data to the new column.
 - Model Driven App :: **Custom Audit**
     - This app is where you can configure the plugin using a custom HTML/JS Web Resource.
