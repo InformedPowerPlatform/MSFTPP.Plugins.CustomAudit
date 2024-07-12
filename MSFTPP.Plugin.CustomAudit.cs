@@ -163,6 +163,10 @@ namespace MSFTPP.Plugin.CustomAudit
                                     oldValue = string.IsNullOrWhiteSpace(preImageEntity[fieldName].ToString()) ? null : preImageEntity[fieldName].ToString();
                                     break;
                             }
+                            
+                            // Testing to see if this fixes a bug
+                            if (oldValue == null) oldValue = string.Empty;
+                            if (newValue == null) newValue = string.Empty;
 
                             auditEntity["msftpp_oldvalue"] = oldValue != null && oldValue.Length > 3999 ? oldValue.Substring(0, 4000) : oldValue;
                             auditEntity["msftpp_newvalue"] = newValue != null && newValue.Length > 3999 ? newValue.Substring(0, 4000) : newValue;
@@ -221,6 +225,7 @@ namespace MSFTPP.Plugin.CustomAudit
                     // Set the default to potentially be used later in the logic
                     createAudit = true;
 
+                    showVariableInTrace(tracer, traceOn, "Checking field.Value", field.Value.ToString());
                     // the field.Value will be set to the 'type' if its not a string or number
                     // so we have to deal with each type
                     switch (field.Value.ToString())
@@ -279,6 +284,14 @@ namespace MSFTPP.Plugin.CustomAudit
                             break;
                     }
 
+                    // Testing to see if this fixes a bug
+                    if(oldValue == null) oldValue = string.Empty;
+                    if(newValue == null) newValue = string.Empty;
+
+                    showVariableInTrace(tracer, traceOn, "Checking if they match...", string.Empty);
+                    showVariableInTrace(tracer, traceOn, "oldValue", oldValue.ToString());
+                    showVariableInTrace(tracer, traceOn, "newValue", newValue.ToString());
+                    
                     // If they match, we are not logging it ... continue;
                     if (oldValue == newValue)
                     {
@@ -287,6 +300,9 @@ namespace MSFTPP.Plugin.CustomAudit
 
                     }
 
+                    showVariableInTrace(tracer, traceOn, "Casing check...", string.Empty);
+                    showVariableInTrace(tracer, traceOn, "oldValue", oldValue.ToLower());
+                    showVariableInTrace(tracer, traceOn, "newValue", newValue.ToLower());
                     // TODO: This might be a configuration setting option?
                     // If only case changes, we are not logging it ... continue;
                     if (oldValue.ToLower() == newValue.ToLower())
