@@ -369,13 +369,28 @@ MSFTPP.CAB.getEntityColumns = function (entityLogicalName, entityFriendlyName) {
                     if(results.value[i]['DisplayName']['UserLocalizedLabel'] !== null) {
                         LocalLabel2 = results.value[i]['DisplayName']['UserLocalizedLabel']['Label'];
                     }
-                    if (AttributeType2.toLowerCase() !== "virtual"
-                        && LogicalName2.toLowerCase().includes("createdby") !== true
+                    MSFTPP.CAB.showConsoleLog("LogicalName2: " + LogicalName2 + " :: AttributeType2: " + AttributeType2 + " :: LocalLabel2: " + LocalLabel2);
+                    
+                    //if (AttributeType2.toLowerCase() !== "virtual"
+                    //    && LogicalName2.toLowerCase().includes("createdby") !== true
+                    //    && LogicalName2.toLowerCase().includes("modifiedby") !== true
+                    //    && LogicalName2.toLowerCase().includes("yomi") !== true
+                    //    && LogicalName2.toLowerCase().includes("createdon") !== true
+                    //    && LogicalName2.toLowerCase().includes("modifiedon") !== true
+                    //    ) {
+
+                    // 2024-10-23 :: ChrisH :: Removing the filter for 'virtual' columns to support multi-select choice columns.
+                    //      Added some additional columns to filter for time zone, version, importsequence
+                    if (LogicalName2.toLowerCase().includes("createdby") !== true
                         && LogicalName2.toLowerCase().includes("modifiedby") !== true
                         && LogicalName2.toLowerCase().includes("yomi") !== true
                         && LogicalName2.toLowerCase().includes("createdon") !== true
                         && LogicalName2.toLowerCase().includes("modifiedon") !== true
-                        ) {
+                        && LogicalName2.toLowerCase().includes("timezoneruleversionnumber") !== true
+                        && LogicalName2.toLowerCase().includes("versionnumber") !== true
+                        && LogicalName2.toLowerCase().includes("utcconversiontimezonecode") !== true
+                        && LogicalName2.toLowerCase().includes("importsequencenumber") !== true
+                    ) {
                         let tableField = {
                             LogicalName: LogicalName2,
                             MetadataId: MetadataId2,

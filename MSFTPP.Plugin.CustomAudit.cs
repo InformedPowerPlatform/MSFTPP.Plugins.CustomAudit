@@ -147,6 +147,10 @@ namespace MSFTPP.Plugin.CustomAudit
                             // so we have to deal with each type
                             switch (field.Value.ToString())
                             {
+                                case "Microsoft.Xrm.Sdk.OptionSetValueCollection":
+                                    oldValue = getMultiSelectOptionSetValues(tracer, service, traceOn, fieldName, entityName, ((Microsoft.Xrm.Sdk.OptionSetValueCollection)preImageEntity[fieldName]));
+                                    break;
+
                                 case "Microsoft.Xrm.Sdk.OptionSetValue":
                                     oldValue = getOptionSetLabelFromOptionSetValue(service, entityName, fieldName, ((OptionSetValue)preImageEntity[fieldName]).Value);
                                     break;
@@ -230,6 +234,21 @@ namespace MSFTPP.Plugin.CustomAudit
                     // so we have to deal with each type
                     switch (field.Value.ToString())
                     {
+                        case "Microsoft.Xrm.Sdk.OptionSetValueCollection":
+                            if (preImageEntity != null && preImageEntity.Contains(fieldName))
+                            {
+                                oldValue = getMultiSelectOptionSetValues(tracer, service, traceOn, fieldName, entityName, ((Microsoft.Xrm.Sdk.OptionSetValueCollection)preImageEntity[fieldName]));
+                            }
+                            else
+                            {
+                                oldValue = null;
+                            }
+
+                            // Get New Values into a string
+                            newValue = getMultiSelectOptionSetValues(tracer, service, traceOn, fieldName, entityName, ((Microsoft.Xrm.Sdk.OptionSetValueCollection)postImageEntity[fieldName]));
+
+                            break;
+
                         case "Microsoft.Xrm.Sdk.OptionSetValue":
                             if (preImageEntity != null && preImageEntity.Contains(fieldName))
                             {
@@ -341,6 +360,27 @@ namespace MSFTPP.Plugin.CustomAudit
             {
                 throw new InvalidPluginExecutionException(e.Message);
             }
+        }
+
+        private static string getMultiSelectOptionSetValues(ITracingService tracer, IOrganizationService service, bool traceOn, string fieldName, string entityName, OptionSetValueCollection multiSelectValues)
+        {
+            string returnValue = null;
+
+            if (multiSelectValues != null)
+            {
+                foreach (var value2 in multiSelectValues)
+                {
+                    // showVariableInTrace(tracer, traceOn, "Value", value2.ToString());
+                    // showVariableInTrace(tracer, traceOn, "Value value", value2.Value.ToString());
+
+                    var t2 = getMultiSelectOptionSetLabelFromOptionSetValue(service, entityName, fieldName, value2.Value);
+                    // showVariableInTrace(tracer, traceOn, "t1", t2);
+                    returnValue += t2;
+                    returnValue += "; ";
+                }
+            }
+
+            return returnValue;
         }
 
         private static void showAttributes(ITracingService tracer, bool traceOn, Entity e, string eName)
@@ -486,6 +526,55 @@ namespace MSFTPP.Plugin.CustomAudit
             return returnValue;
 
         }
+
+        public static string getMultiSelectOptionSetLabelFromOptionSetValue(IOrganizationService service, string entityName, string schemaFieldName, int OptionSetValue, ITracingService tracer = null, bool traceOn = false)
+        {
+            string returnValue = string.Empty;
+
+            RetrieveAttributeRequest retrieveAttributeRequest = new RetrieveAttributeRequest
+            {
+                EntityLogicalName = entityName,
+                LogicalName = schemaFieldName,
+                RetrieveAsIfPublished = true
+            };
+            RetrieveAttributeResponse retrieveAttributeResponse = (RetrieveAttributeResponse)service.Execute(retrieveAttributeRequest);
+            OptionMetadata[] optionList = null;
+
+            // StateAttributeMetadata
+            switch (schemaFieldName)
+            {
+                case "statuscode":
+                    StatusAttributeMetadata a = (StatusAttributeMetadata)retrieveAttributeResponse.AttributeMetadata;
+                    optionList = a.OptionSet.Options.ToArray();
+                    break;
+
+                case "statecode":
+                    StateAttributeMetadata b = (StateAttributeMetadata)retrieveAttributeResponse.AttributeMetadata;
+
+                    optionList = b.OptionSet.Options.ToArray();
+                    break;
+
+                default:
+                    MultiSelectPicklistAttributeMetadata c = (MultiSelectPicklistAttributeMetadata)retrieveAttributeResponse.AttributeMetadata;
+                    optionList = c.OptionSet.Options.ToArray();
+
+                    break;
+
+            }
+            foreach (OptionMetadata o in optionList)
+            {
+                if (o.Value == OptionSetValue)
+                {
+                    returnValue = o.Label.LocalizedLabels.FirstOrDefault(e => e.LanguageCode == 1033).Label.ToString().Trim();
+                    break;
+                }
+            }
+
+
+            return returnValue;
+
+        }
+
 
         public static string getDisplayLabelFromLogicalName(IOrganizationService service, string entityName, string schemaFieldName)
         {
